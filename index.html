@@ -41,7 +41,7 @@
     textarea {
       width: 100%;
       max-width: 800px;
-      height: 250px;
+      height: 450px;
       font-size: 16px;
       padding: 10px;
       border-radius: 6px;
@@ -95,14 +95,13 @@
     let started = false;
 
     function onYouTubeIframeAPIReady() {
-      // A função precisa existir, mas vamos criar o player só depois de clicar em "Iniciar"
+      // Carregamento controlado pelo clique
     }
 
     document.getElementById("startButton").addEventListener("click", () => {
       document.getElementById("startSection").style.display = "none";
       document.getElementById("testSection").style.display = "flex";
 
-      // Agora sim criamos o player
       player = new YT.Player('playerContainer', {
         height: '450',
         width: '800',
@@ -119,26 +118,23 @@
             player.playVideo();
             started = true;
 
-            // Parar vídeo e bloquear primeira textarea após 3 minutos
+            // Após 3 minutos: parar vídeo, bloquear 1ª textarea, mostrar 2ª textarea
             setTimeout(() => {
               player.stopVideo();
               document.getElementById("playerContainer").style.display = "none";
               document.getElementById("memoryInput1").disabled = true;
-
-              // Mostrar segunda textarea
               document.getElementById("textSection2").style.display = "block";
 
-              // Bloquear segunda textarea após 2:30 minutos
+              // Após 2:30 minutos: bloquear 2ª textarea e mostrar mensagem final
               setTimeout(() => {
                 document.getElementById("memoryInput2").disabled = true;
                 document.getElementById("finalMessage").style.display = "block";
-              }, 150000); // 2 min 30 seg
-
+              }, 150000); // 2:30
             }, 180000); // 3 minutos
           },
           'onStateChange': (event) => {
             if (started && event.data === YT.PlayerState.PAUSED) {
-              player.playVideo(); // Impede pausar
+              player.playVideo(); // Previne pause
             }
           }
         }
