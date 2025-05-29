@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teste de Memória Dividida</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      text-align: center;
+    }
+    #startSection, #testSection {
+      margin-top: 50px;
+    }
+    #startButton {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    iframe {
+      margin-top: 20px;
+      border: none;
+      width: 100%;
+      max-width: 640px;
+      height: 360px;
+    }
+    textarea {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 640px;
+      height: 150px;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #afterMessage {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="startSection">
+    <h2>Teste de Memória Dividida</h2>
+    <p>Clique no botão iniciar para iniciar o teste.</p>
+    <button id="startButton">Iniciar</button>
+  </div>
+
+  <div id="testSection" style="display: none;">
+    <iframe id="video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <h3>Escreva abaixo uma memória sua</h3>
+    <textarea id="memoryInput" placeholder="Digite aqui..."></textarea>
+    <div id="afterMessage">Copie esse texto na resposta do teste.</div>
+  </div>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const startSection = document.getElementById("startSection");
+    const testSection = document.getElementById("testSection");
+    const video = document.getElementById("video");
+    const memoryInput = document.getElementById("memoryInput");
+    const afterMessage = document.getElementById("afterMessage");
+
+    startButton.addEventListener("click", () => {
+      startSection.style.display = "none";
+      testSection.style.display = "block";
+
+      // Video YouTube sem controles
+      video.src = "https://www.youtube.com/embed/WwMjJz1Y2PM?autoplay=1&controls=0&modestbranding=1&rel=0&disablekb=1";
+
+      // Timer de 3 minutos (180.000 ms)
+      setTimeout(() => {
+        memoryInput.disabled = true;
+        afterMessage.style.display = "block";
+      }, 180000);
+    });
+  </script>
+
+</body>
+</html>
